@@ -1,3 +1,4 @@
+import { Preferences } from "@capacitor/preferences";
 import {
   IonCard,
   IonCardContent,
@@ -12,13 +13,12 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
-  useIonLoading,
-  useIonRouter,
+  useIonRouter
 } from "@ionic/react";
-import { calendarOutline, camera } from "ionicons/icons";
+import { calendarOutline } from "ionicons/icons";
 import { useState } from "react";
-import { Preferences } from "@capacitor/preferences";
-interface Payslip {
+import { getDate } from "../hooks/utils";
+export interface Payslip {
   id: string;
   fromDate: number;
   toDate: number;
@@ -89,31 +89,7 @@ const PayslipLists: React.FC = () => {
       file: "../../assets/payslips/payslip.pdf",
     },
   ]);
-  const getDate = (timestamp: number, type: string) => {
-    var months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const date = new Date(timestamp * 1000);
-    switch (type) {
-      case "month":
-        return months[date.getMonth()];
-      case "day":
-        return date.getDate();
-      case "date":
-        return `${date.getDate()} ${months[date.getMonth()]}`;
-    }
-  };
+
   const ShowPayslipDetails = (payslip: Payslip) => {
     Preferences.set({
       key: "payslip",
@@ -124,7 +100,7 @@ const PayslipLists: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color={"success"}>
+        <IonToolbar color={"primary"}>
           <IonTitle>Payslips</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -133,7 +109,7 @@ const PayslipLists: React.FC = () => {
           <IonRow>
             {payslips.map((item: Payslip) => (
               <IonCol size="12" sizeMd="6" sizeLg="4" sizeXl="4" key={item.id}>
-                <IonCard onClick={() => ShowPayslipDetails(item)}>
+                <IonCard button onClick={() => ShowPayslipDetails(item)}>
                   <IonCardHeader>
                     <IonCardTitle>
                       {getDate(item.fromDate, "month")} Payslip
