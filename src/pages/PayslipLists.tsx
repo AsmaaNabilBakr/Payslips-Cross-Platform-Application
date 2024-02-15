@@ -20,6 +20,7 @@ export interface Payslip {
   fromDate: number;
   toDate: number;
   file: string;
+  status: string
 }
 
 const PayslipLists: React.FC = () => {
@@ -30,48 +31,56 @@ const PayslipLists: React.FC = () => {
       fromDate: 1640995200,
       toDate: 1643673600,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Late",
     },
     {
       id: "2",
       fromDate: 1659475200,
       toDate: 1662070400,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "3",
       fromDate: 1646256000,
       toDate: 1648934400,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "4",
       fromDate: 1648934400,
       toDate: 1651526400,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "5",
       fromDate: 1664748800,
       toDate: 1667340800,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "6",
       fromDate: 1654204800,
       toDate: 1656796800,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "7",
       fromDate: 1656796800,
       toDate: 1659475200,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "8",
       fromDate: 1643673600,
       toDate: 1646256000,
       file: "../../assets/payslips/dummy.pdf",
+      status: "Paid",
     },
 
     {
@@ -79,12 +88,14 @@ const PayslipLists: React.FC = () => {
       fromDate: 1662070400,
       toDate: 1664748800,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
     {
       id: "10",
       fromDate: 1651526400,
       toDate: 1654204800,
       file: "../../assets/payslips/payslip.pdf",
+      status: "Paid",
     },
   ];
 

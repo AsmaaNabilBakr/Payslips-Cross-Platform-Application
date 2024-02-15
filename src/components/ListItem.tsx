@@ -13,6 +13,14 @@ interface Props {
   payslip: Payslip;
 }
 const ListItem: React.FC<Props> = ({ ShowPayslipDetails, payslip }) => {
+  const getColor = () => {
+    switch (payslip.status) {
+      case "Paid":
+        return "success";
+      case "Late":
+        return "danger";
+    }
+  };
   return (
     <IonCard
       className="card"
@@ -22,8 +30,8 @@ const ListItem: React.FC<Props> = ({ ShowPayslipDetails, payslip }) => {
       <IonCardHeader>
         <IonCardTitle className="listCardTitle ion-justify-content-between ion-align-items-center">
           {getDate(payslip.fromDate, "month")} Payslip
-          <IonBadge mode={"ios"} color="success">
-            Paid
+          <IonBadge mode={"ios"} color={getColor()}>
+            {payslip.status}
           </IonBadge>
         </IonCardTitle>
       </IonCardHeader>
