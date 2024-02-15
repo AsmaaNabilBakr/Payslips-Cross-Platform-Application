@@ -1,0 +1,7 @@
+{
+  "name": "payslips",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
