@@ -1,0 +1,14 @@
+.listCardTitle {
+  display: flex;
+}
+
+ion-card::part(native),
+.card {
+  border-left: 2px solid var(--ion-color-primary);
+  background-color: #f5f5f5ec;
+  box-shadow: none !important;
+}
+
+/* ion-badge{
+    font-weight: bold;
+} */

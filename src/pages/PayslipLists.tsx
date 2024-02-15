@@ -1,23 +1,20 @@
 import { Preferences } from "@capacitor/preferences";
 import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
-  IonIcon,
   IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
-  useIonRouter
+  IonText,
+  useIonRouter,
+  useIonViewDidEnter,
 } from "@ionic/react";
-import { calendarOutline } from "ionicons/icons";
 import { useState } from "react";
+import Header from "../components/Header";
+import ListItem from "../components/ListItem";
 import { getDate } from "../hooks/utils";
+import "./pages.css";
+
 export interface Payslip {
   id: string;
   fromDate: number;
@@ -27,7 +24,7 @@ export interface Payslip {
 
 const PayslipLists: React.FC = () => {
   const router = useIonRouter();
-  const [payslips] = useState<Payslip[]>([
+  const data = [
     {
       id: "1",
       fromDate: 1640995200,
@@ -36,9 +33,9 @@ const PayslipLists: React.FC = () => {
     },
     {
       id: "2",
-      fromDate: 1643673600,
-      toDate: 1646256000,
-      file: "../../assets/payslips/dummy.pdf",
+      fromDate: 1659475200,
+      toDate: 1662070400,
+      file: "../../assets/payslips/payslip.pdf",
     },
     {
       id: "3",
@@ -54,8 +51,8 @@ const PayslipLists: React.FC = () => {
     },
     {
       id: "5",
-      fromDate: 1651526400,
-      toDate: 1654204800,
+      fromDate: 1664748800,
+      toDate: 1667340800,
       file: "../../assets/payslips/payslip.pdf",
     },
     {
@@ -72,10 +69,11 @@ const PayslipLists: React.FC = () => {
     },
     {
       id: "8",
-      fromDate: 1659475200,
-      toDate: 1662070400,
-      file: "../../assets/payslips/payslip.pdf",
+      fromDate: 1643673600,
+      toDate: 1646256000,
+      file: "../../assets/payslips/dummy.pdf",
     },
+
     {
       id: "9",
       fromDate: 1662070400,
@@ -84,11 +82,24 @@ const PayslipLists: React.FC = () => {
     },
     {
       id: "10",
-      fromDate: 1664748800,
-      toDate: 1667340800,
+      fromDate: 1651526400,
+      toDate: 1654204800,
       file: "../../assets/payslips/payslip.pdf",
     },
-  ]);
+  ];
+
+  const [payslips, setPayslip] = useState<Payslip[]>();
+
+  useIonViewDidEnter(() => {
+    const sortData = async () => {
+      const sortData = data.sort(
+        (a, b) =>
+          (getDate(a.fromDate) as number) - (getDate(b.fromDate) as number)
+      );
+      setPayslip(sortData);
+    };
+    sortData();
+  }, []);
 
   const ShowPayslipDetails = (payslip: Payslip) => {
     Preferences.set({
@@ -99,28 +110,22 @@ const PayslipLists: React.FC = () => {
   };
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar color={"primary"}>
-          <IonTitle>Payslips</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title="Payslips" />
+
       <IonContent fullscreen forceOverscroll={false}>
         <IonGrid>
           <IonRow>
-            {payslips.map((item: Payslip) => (
+            <IonText className="ion-padding-start" color="medium">
+              Your payslip will be available on platform by your pay day.
+            </IonText>
+          </IonRow>
+          <IonRow>
+            {payslips?.map((item: Payslip) => (
               <IonCol size="12" sizeMd="6" sizeLg="4" sizeXl="4" key={item.id}>
-                <IonCard button onClick={() => ShowPayslipDetails(item)}>
-                  <IonCardHeader>
-                    <IonCardTitle>
-                      {getDate(item.fromDate, "month")} Payslip
-                    </IonCardTitle>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    <IonIcon icon={calendarOutline} />
-                    From: {getDate(item.fromDate, "date")} To:{" "}
-                    {getDate(item.toDate, "date")}
-                  </IonCardContent>
-                </IonCard>
+                <ListItem
+                  ShowPayslipDetails={ShowPayslipDetails}
+                  payslip={item}
+                />
               </IonCol>
             ))}
           </IonRow>
