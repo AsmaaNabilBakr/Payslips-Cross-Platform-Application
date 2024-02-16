@@ -1,14 +1,23 @@
-.listCardTitle {
+.listCardItem {
+  border-left: 2px solid var(--ion-color-primary);
+}
+.listCardItem ion-card-title {
   display: flex;
+}
+.payslipDetailsPage ion-card-content div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 ion-card::part(native),
 .card {
-  border-left: 2px solid var(--ion-color-primary);
   background-color: #f5f5f5ec;
   box-shadow: none !important;
 }
-
-/* ion-badge{
-    font-weight: bold;
-} */
+ion-badge {
+  display: flex;
+}
+ion-badge ion-icon {
+  margin-left: 4px;
+}
