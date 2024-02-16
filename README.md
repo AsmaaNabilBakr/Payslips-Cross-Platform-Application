@@ -49,3 +49,20 @@ run on Ios
 ```bash
 ionic capacitor run ios --livereload --external
 ```
+
+## Preview
+
+
+<div style="display: flex; flex-direction: 'row' ;margin-bottom:15px; justify-content: space-between;">
+<img src="./screenshots/1.png" width=30%>
+<img src="./screenshots/2.png" width="30%">
+<img src="./screenshots/3.png" width="30%">
+
+</div>
+<div style="display: flex; flex-direction: 'row' ;margin-bottom:5px; justify-content: space-between;">
+
+<img src="./screenshots/4.png" width=30%>
+<img src="./screenshots/5.png" width="30%">
+<img src="./screenshots/6.png" width="30%">
+
+</div>
